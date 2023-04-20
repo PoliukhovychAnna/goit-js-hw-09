@@ -2,6 +2,15 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+const timerStyle = document.querySelector(".timer")
+const timeSections = document.querySelectorAll(".field")
+
+  const sections = [...timeSections]
+sections.forEach(section => section.classList.add("time-field"))
+
+timerStyle.classList.add("timer-box");
+
+
 const input = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 const daysEl = document.querySelector('[data-days]');

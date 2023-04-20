@@ -16,3 +16,14 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer-box {
+  display: flex;
+  justify-content: center;
+}
+
+.time-field {
+  margin-top: 220px;
+margin-right: 70px;
+font-size: 60px;
+}
