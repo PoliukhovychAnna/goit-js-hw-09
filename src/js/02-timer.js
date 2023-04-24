@@ -23,8 +23,6 @@ startBtn.addEventListener("click", onClick)
 
 let currentTime = null
 let chosenDate = null;
-let timeLeft = null;
-
 
 
 flatpickr(input, {
@@ -35,12 +33,11 @@ flatpickr(input, {
   onClose(selectedDates) {
     currentTime = Date.now();
     chosenDate = selectedDates[0].getTime();
-    timeLeft = chosenDate - currentTime;
-    if (timeLeft > 0) {
+    if (chosenDate - currentTime > 0) {
       startBtn.removeAttribute('disabled');
-       input.setAttribute('disabled', '');
+      input.setAttribute('disabled', '');
     }
-    if (timeLeft < 0) {
+    if (chosenDate - currentTime < 0) {
       Notify.failure('Please choose a date in the future');
       return;
     }
