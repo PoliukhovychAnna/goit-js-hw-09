@@ -65,7 +65,6 @@ flatpickr(input, {
 function onClick() {
   startBtn.setAttribute('disabled', '');
   const timerId = setInterval(() => {
-     let TIME = convertMs(chosenDate - Date.now());
      if (chosenDate - Date.now() <= 0) {
        clearInterval(timerId);
        input.removeAttribute('disabled');
@@ -73,6 +72,7 @@ function onClick() {
        return;
     }
     
+     let TIME = convertMs(chosenDate - Date.now());
     daysEl.textContent = addLeadingZero(TIME.days);
     hoursEl.textContent = addLeadingZero(TIME.hours);
     minutesEl.textContent = addLeadingZero(TIME.minutes);
