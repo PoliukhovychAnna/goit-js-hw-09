@@ -16,7 +16,7 @@ function onSubmit(e) {
   const amountInputValue = Number(amount.value);
 
   for (let i = 1; i <= amountInputValue; i += 1) {
-    if ((delayInputValue < 0) || (stepInputValue < 0) || (amountInputValue <= 0)) {
+    if (delayInputValue < 0 || stepInputValue < 0 || amountInputValue <= 0) {
       Notify.failure('❌ Can not be negative values!');
       return;
     } 
