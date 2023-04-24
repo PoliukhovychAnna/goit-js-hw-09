@@ -65,17 +65,19 @@ flatpickr(input, {
 function onClick() {
   startBtn.setAttribute('disabled', '');
   const timerId = setInterval(() => {
+     if (timeLeft <= 0) {
+       clearInterval(timerId);
+       input.removeAttribute('disabled');
+       startBtn.removeAttribute('disabled');
+       return
+     }
     let TIME = convertMs(chosenDate - Date.now());
     daysEl.textContent = addLeadingZero(TIME.days);
     hoursEl.textContent = addLeadingZero(TIME.hours);
     minutesEl.textContent = addLeadingZero(TIME.minutes);
     secondsEl.textContent = addLeadingZero(TIME.seconds);
   }, 1000)
-  if (timeLeft <= 0) {
-    clearInterval(timerId)
-    input.removeAttribute('disabled');
-    startBtn.removeAttribute('disabled');
-}
+ 
 }
 
 function addLeadingZero(value) {
