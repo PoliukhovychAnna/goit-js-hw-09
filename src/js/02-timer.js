@@ -62,13 +62,19 @@ flatpickr(input, {
 
 function onClick() {
   startBtn.setAttribute('disabled', '');
-  input.setAttribute('disabled', 'true');
-  setInterval(() => {
+  // input.setAttribute('disabled', 'true');
+  const timerId = setInterval(() => {
     let TIME = convertMs(chosenDate - Date.now());
-    daysEl.textContent = addLeadingZero(TIME.days || 00);
-    hoursEl.textContent = addLeadingZero(TIME.hours || 00);
-    minutesEl.textContent = addLeadingZero(TIME.minutes || 00);
-    secondsEl.textContent = addLeadingZero(TIME.seconds || 00);
+    if ((TIME.days < 0) || (TIME.hours < 0) || (TIME.minutes < 0) || (TIME.seconds < 0)){
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minutesEl.textContent = '00';
+      secondsEl.textContent = '00';
+    }
+    daysEl.textContent = addLeadingZero(TIME.days);
+    hoursEl.textContent = addLeadingZero(TIME.hours);
+    minutesEl.textContent = addLeadingZero(TIME.minutes);
+    secondsEl.textContent = addLeadingZero(TIME.seconds);
   }, 1000)}
 
 function addLeadingZero(value) {
