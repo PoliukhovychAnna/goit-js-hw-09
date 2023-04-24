@@ -36,14 +36,15 @@ flatpickr(input, {
     chosenDate = selectedDates[0].getTime();
     if (chosenDate - currentTime > 0) {
       startBtn.removeAttribute('disabled');
+      input.setAttribute(' readonly', 'true');
     }
     if (chosenDate - currentTime < 0) {
-      Notify.failure('Please choose a date in the future');
+    Notify.failure('Please choose a date in the future');
       return;
     }
   },
 
-  //метод onChange більш функціональний і заздалегідь рятує від неправильно обраної дати, а не тільки після закриття
+  // метод onChange більш функціональний і заздалегідь рятує від неправильно обраної дати, а не тільки після закриття
   // onChange(selectedDates) {
   //   currentTime = Date.now();
   //   chosenDate = selectedDates[0].getTime();
@@ -61,12 +62,13 @@ flatpickr(input, {
 
 function onClick() {
   startBtn.setAttribute('disabled', '');
+  input.setAttribute('disabled', 'true');
   setInterval(() => {
     let TIME = convertMs(chosenDate - Date.now());
-    daysEl.textContent = addLeadingZero(TIME.days);
-    hoursEl.textContent = addLeadingZero(TIME.hours);
-    minutesEl.textContent = addLeadingZero(TIME.minutes);
-    secondsEl.textContent = addLeadingZero(TIME.seconds);
+    daysEl.textContent = addLeadingZero(TIME.days || 00);
+    hoursEl.textContent = addLeadingZero(TIME.hours || 00);
+    minutesEl.textContent = addLeadingZero(TIME.minutes || 00);
+    secondsEl.textContent = addLeadingZero(TIME.seconds || 00);
   }, 1000)}
 
 function addLeadingZero(value) {
