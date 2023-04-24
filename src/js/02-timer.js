@@ -70,9 +70,9 @@ function onClick() {
     secondsEl.textContent = addLeadingZero(TIME.seconds);
   }, 1000)
   if (chosenDate - Date.now() < 0) {
-    daysEl.textContent = 00;
-    hoursEl.textContent = 00;
-    minutesEl.textContent = 00;
+    daysEl.textContent = "00";
+    hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
     secondsEl.textContent = "00";
   clearInterval(timerId)
 }
