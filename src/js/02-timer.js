@@ -36,7 +36,7 @@ flatpickr(input, {
     chosenDate = selectedDates[0].getTime();
     if (chosenDate - currentTime > 0) {
       startBtn.removeAttribute('disabled');
-      input.setAttribute(' readonly', 'true');
+      input.setAttribute('disabled', 'true');
     }
     if (chosenDate - currentTime < 0) {
     Notify.failure('Please choose a date in the future');
@@ -62,20 +62,21 @@ flatpickr(input, {
 
 function onClick() {
   startBtn.setAttribute('disabled', '');
-  // input.setAttribute('disabled', 'true');
   const timerId = setInterval(() => {
     let TIME = convertMs(chosenDate - Date.now());
-    if ((TIME.days < 0) || (TIME.hours < 0) || (TIME.minutes < 0) || (TIME.seconds < 0)){
-      daysEl.textContent = '00';
-      hoursEl.textContent = '00';
-      minutesEl.textContent = '00';
-      secondsEl.textContent = '00';
-    }
     daysEl.textContent = addLeadingZero(TIME.days);
     hoursEl.textContent = addLeadingZero(TIME.hours);
     minutesEl.textContent = addLeadingZero(TIME.minutes);
     secondsEl.textContent = addLeadingZero(TIME.seconds);
-  }, 1000)}
+  }, 1000)
+  if (chosenDate - Date.now() < 0) {
+    daysEl.textContent = 00;
+    hoursEl.textContent = 00;
+    minutesEl.textContent = 00;
+    secondsEl.textContent = "00";
+  clearInterval(timerId)
+}
+}
 
 function addLeadingZero(value) {
   const timerValue = `${value}`;
