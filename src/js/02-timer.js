@@ -36,7 +36,7 @@ flatpickr(input, {
     chosenDate = selectedDates[0].getTime();
     if (chosenDate - currentTime > 0) {
       startBtn.removeAttribute('disabled');
-      input.setAttribute('disabled', 'true');
+      input.setAttribute('readonly', 'readonly');
     }
     if (chosenDate - currentTime < 0) {
     Notify.failure('Please choose a date in the future');
