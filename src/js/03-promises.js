@@ -14,12 +14,13 @@ function onSubmit(e) {
   const delayInputValue = Number(delay.value);
   const stepInputValue = Number(step.value);
   const amountInputValue = Number(amount.value);
+  
+  if (delayInputValue < 0 || stepInputValue < 0 || amountInputValue <= 0) {
+    Notify.failure('❌ Can not be negative values!');
+    return;
+  } 
 
   for (let i = 1; i <= amountInputValue; i += 1) {
-    if (delayInputValue < 0 || stepInputValue < 0 || amountInputValue <= 0) {
-      Notify.failure('❌ Can not be negative values!');
-      return;
-    } 
     const newDelay = delayInputValue + (i - 1) * stepInputValue;
     createPromise(i, newDelay)
       .then(({ position, delay }) => {
