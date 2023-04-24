@@ -23,6 +23,7 @@ startBtn.addEventListener("click", onClick)
 
 let currentTime = null
 let chosenDate = null;
+let timeLeft = null;
 
 
 
@@ -34,13 +35,13 @@ flatpickr(input, {
   onClose(selectedDates) {
     currentTime = Date.now();
     chosenDate = selectedDates[0].getTime();
-    if (chosenDate - currentTime > 0) {
+    timeLeft = chosenDate - currentTime;
+    if (timeLeft > 0) {
       startBtn.removeAttribute('disabled');
-      input.setAttribute('readonly', 'readonly');
        input.setAttribute('disabled', '');
     }
-    if (chosenDate - currentTime < 0) {
-    Notify.failure('Please choose a date in the future');
+    if (timeLeft < 0) {
+      Notify.failure('Please choose a date in the future');
       return;
     }
   },
@@ -70,12 +71,10 @@ function onClick() {
     minutesEl.textContent = addLeadingZero(TIME.minutes);
     secondsEl.textContent = addLeadingZero(TIME.seconds);
   }, 1000)
-  if (chosenDate - Date.now() < 0) {
-    daysEl.textContent = "00";
-    hoursEl.textContent = "00";
-    minutesEl.textContent = "00";
-    secondsEl.textContent = "00";
-  clearInterval(timerId)
+  if (timeLeft <= 0) {
+    clearInterval(timerId)
+    input.removeAttribute('disabled');
+    startBtn.removeAttribute('disabled');
 }
 }
 
